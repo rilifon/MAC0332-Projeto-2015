@@ -28,9 +28,11 @@
 \maketitle
 
 A primeira relação é de receitas. Contém os campos não-multivalorados necessários para descrever uma receita e avaliá-la.
+\subsubsection{} A primeira relação é de receitas. Contém os campos não-multivalorados necessários para descrever uma receita e avaliá-la.
+
 
 \begin{center}
-\begin{tabular}{ l | l || l | l l }
+\begin{tabular}{ l l l l l }
   \multicolumn{5}{l}{\textbf{RECEITAS}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
@@ -38,7 +40,7 @@ A primeira relação é de receitas. Contém os campos não-multivalorados neces
   Primária & REC\_CODIGO & Código da Receita & Inteiro & 8 \emph{bits}  \\
    & REC\_NOME & Nome da Receita & Texto & 255 \\
    & USU\_LOGIN & Usuário autor da Receita & Texto & 255 \\
-   & REC\_DATA & Data de Submissão & Data(Inteiro) & 6 \\
+   & REC\_DATA & Data de Submissão & Data & 6 \\
    & REC\_TEMPO & Tempo de preparo & Tempo(Inteiro) & 4 \\
    & REC\_PORC & Quantas porções serve & Inteiro & 8 \emph{bits} \\
    & REC\_AVAL & Quantidade de avaliações & Inteiro & 8 \emph{bits} \\
@@ -47,10 +49,12 @@ A primeira relação é de receitas. Contém os campos não-multivalorados neces
 \end{tabular}
 \end{center}
 
-A relação de Ingredientes se refere aos ingredientes necessários para cada receita. Como cada receita pode ter mais de um ingrediente e cada ingrediente pode estar em mais de uma receita, os dois campos constituem a chave primária.
+\vfill
+
+\subsubsection{} A relação de Ingredientes se refere aos ingredientes necessários para cada receita. Como cada receita pode ter mais de um ingrediente e cada ingrediente pode estar em mais de uma receita, os dois campos constituem a chave primária.
 
 \begin{center}
-\begin{tabular}{ l | l || l | l l }
+\begin{tabular}{ l  l  l  l l }
   \multicolumn{5}{l}{\textbf{INGREDIENTES}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
@@ -64,10 +68,10 @@ A relação de Ingredientes se refere aos ingredientes necessários para cada re
 
 \newpage
 
-Relação de Usuário. Contém as informações básicas e para estatísticas de receitas.
+\subsubsection{} Relação de Usuário. Contém as informações básicas e para estatísticas de receitas.
 
 \begin{center}
-\begin{tabular}{ l | l || l | l l }
+\begin{tabular}{ l  l  l  l l }
   \multicolumn{5}{l}{\textbf{USUÁRIOS}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
@@ -80,10 +84,12 @@ Relação de Usuário. Contém as informações básicas e para estatísticas de
 \end{tabular}
 \end{center}
 
-Relação de Estoques. Parecida com a relação Ingredientes, mas referente ao estoque de cada usuário e não às receitas. Contém também informações de validade.
+\vfill
+
+\subsubsection{} Relação de Estoques. Parecida com a relação Ingredientes, mas referente ao estoque de cada usuário e não às receitas. Contém também informações de validade.
 
 \begin{center}
-\begin{tabular}{ l | l || l | l l }
+\begin{tabular}{ l  l  l  l l }
   \multicolumn{5}{l}{\textbf{ESTOQUE}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
@@ -92,15 +98,17 @@ Relação de Estoques. Parecida com a relação Ingredientes, mas referente ao e
   Primária & ING\_NOME & Nome do Ingrediente em estoque & Texto & 255 \\
    & EST\_QUANT & Quantidade em estoque & Decimal & 16 \emph{bits} \\
    & EST\_UNI & Unidade (colheres, gramas...) & Texto & 255 \\
-   & EST\_DATA & Data de estocagem & Data(Inteiro) & 6 \\
-   & EST\_VAL & Data de validade & Data(Inteiro) & 6
+   & EST\_DATA & Data de estocagem & Data & 6 \\
+   & EST\_VAL & Data de validade & Data & 6
 \end{tabular}
 \end{center}
 
-Relação das Famílias dos Ingredientes. Necessária para sabermos quais ingredientes impossibilitam cada atributo.
+\vfill
+
+\subsubsection{} Relação das Famílias dos Ingredientes. Útil para praticidade de entrada.
 
 \begin{center}
-\begin{tabular}{ l | l || l | l l }
+\begin{tabular}{ l  l  l  l l }
   \multicolumn{5}{l}{\textbf{FAMÍLIAS}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
@@ -111,30 +119,19 @@ Relação das Famílias dos Ingredientes. Necessária para sabermos quais ingred
 \end{tabular}
 \end{center}
 
-Relação dos Atributos das Receitas. Atributos que podem ser usados como filtro na busca de receitas.
+\newpage
+
+\subsubsection{} Relação das Categorias das Receitas. Categorias podem ser usadas como filtro na busca de receitas.
 
 \begin{center}
-\begin{tabular}{ l | l || l | l l }
-  \multicolumn{5}{l}{\textbf{ATRIBUTOS (RECEITAS)}} \\
+\begin{tabular}{ l  l  l  l l }
+  \multicolumn{5}{l}{\textbf{CATEGORIA}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
   \cline{1-5}
   Primária & ATR\_NOME & Nome do Atributo & Texto & 255 \\
   Primária & REC\_CODIGO & Código da receita com o atributo & Inteiro & 8 \emph{bits} \\
    & ATR\_DESC & Breve descrição do Atributo & Texto & 255
-\end{tabular}
-\end{center}
-
-E finalmente, a relação que permite especificar quais famílias impossibilitam cada atributo.
-
-\begin{center}
-\begin{tabular}{ l | l || l | l l }
-  \multicolumn{5}{l}{\textbf{ATRIBUTOS (FAMÍLIAS)}} \\
-  \hline
-  \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
-  \cline{1-5}
-  Primária & ATR\_NOME & Nome do Atributo& Texto & 255 \\
-  Primária & FAM\_NOME & Família que o restringe & Texto & 255
 \end{tabular}
 \end{center}
 
