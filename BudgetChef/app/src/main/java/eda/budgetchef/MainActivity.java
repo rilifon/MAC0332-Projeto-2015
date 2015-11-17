@@ -1,5 +1,6 @@
 package eda.budgetchef;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -9,10 +10,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener, PageSelectedListener{
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+
+    Log.w("MyActivity", "Testing");
 
     if (findViewById(R.id.page_content) != null) {
       if (savedInstanceState != null)
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.top_create) {
+      goToCreate(item);
       return true;
     }
 
@@ -78,41 +84,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
 
-    Fragment page = null;
-    Class pageClass = null;
+    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    Fragment nextPage = null;
+
+    Log.w("Checking MenuItem", "Item: " + item);
 
     switch(item.getItemId()) {
       case R.id.nav_fridge:
-        pageClass = FridgePage.class;
+        nextPage = new FridgePage();
         break;
       case R.id.nav_search:
-        pageClass = SearchPage.class;
+        nextPage = new SearchPage();
         break;
       case R.id.nav_create:
-        pageClass = CreatePage.class;
+        nextPage = new CreatePage();
         break;
       case R.id.nav_recommended:
-        pageClass = RecommendedPage.class;
+        nextPage = new RecommendedPage();
         break;
       case R.id.nav_favorites:
-        pageClass = FavoritesPage.class;
+        nextPage = new FavoritesPage();
         break;
       case R.id.nav_profile:
-        pageClass = ProfilePage.class;
+        nextPage = new ProfilePage();
         break;
       case R.id.nav_settings:
-        pageClass = SettingsPage.class;
+        nextPage = new SettingsPage();
         break;
     }
 
-    try {
-      page = (Fragment) pageClass.newInstance();
-    } catch(Exception exc) {
-      exc.printStackTrace();
+    if (nextPage == null) {
+      Log.w("MainActivity", "Error 404: Page not found.");
+      return false;
     }
 
-    FragmentManager pageManager = getFragmentManager();
-    pageManager.beginTransaction().replace(R.id.page_content, page).commit();
+    transaction.replace(R.id.page_content, nextPage);
+    transaction.addToBackStack(null);
+    transaction.commit();
 
     item.setChecked(true);
     setTitle(item.getTitle());
@@ -122,7 +130,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return true;
   }
 
+  /** Action CreateRecipe on AppBar. */
   public void goToCreate(MenuItem item) {
+    Log.w("App Bar", "Go to Create Recipe Page.");
+  }
 
+  /** Listens to interaction on each Fragment (Page). */
+  public void onPageInteraction(String id) {
+    Log.w("MainActivity", "ID: " + id);
   }
 }
