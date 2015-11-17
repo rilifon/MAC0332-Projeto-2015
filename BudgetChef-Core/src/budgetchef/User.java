@@ -11,7 +11,7 @@ public class User {
   }
 
   public String getName() { return name_; }
-  public Ingredient[] getIngredients() { return fridge_.getIngredients(); }
+  public Ingredient[] getIngredients() { return fridge_.getIngredients(Fridge.List.STORAGE); }
   
   public Recipe getRecipe(String name) {
     for (Recipe r : recipes_)

@@ -18,5 +18,20 @@ public class Recipe {
 	 return ingredients_.toArray(array);
   }
   
+  public void addIngredient(Ingredient... ingredients) {
+    ingredients_.addAll(java.util.Arrays.asList(ingredients));
+  }
+ 
+  public void removeIngredient(String name) {
+    
+  }
+  
+  public Ingredient getIngredient(String name) {
+    for (Ingredient retVal : ingredients_)
+      if (retVal.getName().equals(name))
+        return retVal;
+    return null;
+  }
+  
   public double getRatings() { return rating_; }
 }
