@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_fridge"
+            android:icon="@drawable/ic_menu_fridge"
+            android:title="Minha Geladeira"/>
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_menu_search"
+            android:title="Buscar"/>
+        <item
+            android:id="@+id/nav_create"
+            android:icon="@drawable/ic_menu_create"
+            android:title="Criar Receita"/>
+        <item
+            android:id="@+id/nav_recommended"
+            android:icon="@drawable/ic_menu_recommended"
+            android:title="Receitas Recomendadas"/>
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_menu_favorites"
+            android:title="Favoritos"/>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="Perfil"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="Configurações"/>
+    </group>
+</menu>
