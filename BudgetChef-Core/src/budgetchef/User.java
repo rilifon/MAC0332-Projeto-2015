@@ -2,12 +2,14 @@ package budgetchef;
 
 public class User {
   private String name_;
+  private String password_;
 
   private java.util.ArrayList<Recipe> recipes_ = new java.util.ArrayList<>();
   private Fridge fridge_ = new Fridge();
 
-  public User(String name) {
+  public User(String name, String password) {
     name_ = name;
+    password_ = password;
   }
 
   public String getName() { return name_; }
@@ -31,4 +33,8 @@ public class User {
   }
   
   public void addRecipe(Recipe r) { recipes_.add(r); }
+  
+  public boolean validate(String name, String password) {
+    return name.equals(name_) && password.equals(password_);
+  }
 }

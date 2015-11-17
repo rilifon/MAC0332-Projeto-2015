@@ -23,7 +23,11 @@ public class Recipe {
   }
  
   public void removeIngredient(String name) {
-    
+    for (Ingredient toRem : ingredients_)
+      if (toRem.getName().equals(name)) {
+        ingredients_.remove(toRem);
+        return;
+      }
   }
   
   public Ingredient getIngredient(String name) {
