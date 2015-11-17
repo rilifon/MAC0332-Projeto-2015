@@ -5,6 +5,7 @@ public class Recipe {
   private java.util.ArrayList<Ingredient> ingredients_;
 
   private double rating_ = 0;
+  private double ratingCount_ = 0;
 
   public Recipe(String name, Ingredient... ingredients) {
     name_ = name;
@@ -35,6 +36,13 @@ public class Recipe {
       if (retVal.getName().equals(name))
         return retVal;
     return null;
+  }
+  
+  public void addRating(double newRating) {
+    rating_ = rating_*ratingCount_;
+    rating_ += newRating;
+    ratingCount_++;
+    rating_ /= ratingCount_;
   }
   
   public double getRatings() { return rating_; }
