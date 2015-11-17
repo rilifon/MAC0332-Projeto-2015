@@ -2969,7 +2969,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "cofee_spoon",
+											"text": "soup_spoon",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -7395,7 +7395,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFRFv1xov/jiYw="
 							},
-							"name": "cofee_spoon",
+							"name": "soup_spoon",
 							"visibility": "public"
 						},
 						{
