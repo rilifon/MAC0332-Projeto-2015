@@ -17,6 +17,7 @@
         <item
             android:id="@+id/nav_recommended"
             android:icon="@drawable/ic_menu_recommended"
+            android:checked="true"
             android:title="Receitas Recomendadas"/>
         <item
             android:id="@+id/nav_favorites"

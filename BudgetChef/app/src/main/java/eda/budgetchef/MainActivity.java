@@ -1,9 +1,8 @@
 package eda.budgetchef;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,25 +12,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class RecommendedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_recommended);
+    setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-      }
-    });
+    if (findViewById(R.id.page_content) != null) {
+      if (savedInstanceState != null)
+        return;
+
+      RecommendedPage recPage = new RecommendedPage();
+      recPage.setArguments(getIntent().getExtras());
+
+      getFragmentManager().beginTransaction().add(R.id.page_content, recPage).commit();
+    }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.setDrawerListener(toggle);
     toggle.syncState();
 
@@ -52,7 +54,7 @@ public class RecommendedActivity extends AppCompatActivity implements Navigation
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.recommended, menu);
+    getMenuInflater().inflate(R.menu.main, menu);
     return true;
   }
 
@@ -64,7 +66,7 @@ public class RecommendedActivity extends AppCompatActivity implements Navigation
     int id = item.getItemId();
 
     //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
+    if (id == R.id.top_create) {
       return true;
     }
 
@@ -75,30 +77,52 @@ public class RecommendedActivity extends AppCompatActivity implements Navigation
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
-    int id = item.getItemId();
 
-    if (id == R.id.nav_fridge) {
+    Fragment page = null;
+    Class pageClass = null;
 
-    } else if (id == R.id.nav_search) {
-
-    } else if (id == R.id.nav_create) {
-
-    } else if (id == R.id.nav_recommended) {
-
-    } else if (id == R.id.nav_favorites) {
-
-    } else if (id == R.id.nav_profile) {
-
-    } else if (id == R.id.nav_settings) {
-
+    switch(item.getItemId()) {
+      case R.id.nav_fridge:
+        pageClass = FridgePage.class;
+        break;
+      case R.id.nav_search:
+        pageClass = SearchPage.class;
+        break;
+      case R.id.nav_create:
+        pageClass = CreatePage.class;
+        break;
+      case R.id.nav_recommended:
+        pageClass = RecommendedPage.class;
+        break;
+      case R.id.nav_favorites:
+        pageClass = FavoritesPage.class;
+        break;
+      case R.id.nav_profile:
+        pageClass = ProfilePage.class;
+        break;
+      case R.id.nav_settings:
+        pageClass = SettingsPage.class;
+        break;
     }
+
+    try {
+      page = (Fragment) pageClass.newInstance();
+    } catch(Exception exc) {
+      exc.printStackTrace();
+    }
+
+    FragmentManager pageManager = getFragmentManager();
+    pageManager.beginTransaction().replace(R.id.page_content, page).commit();
+
+    item.setChecked(true);
+    setTitle(item.getTitle());
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
   }
 
-  public void goToCreate(View view) {
+  public void goToCreate(MenuItem item) {
 
   }
 }

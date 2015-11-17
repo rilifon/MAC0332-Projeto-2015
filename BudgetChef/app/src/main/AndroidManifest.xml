@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecommendedActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_recommended"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >

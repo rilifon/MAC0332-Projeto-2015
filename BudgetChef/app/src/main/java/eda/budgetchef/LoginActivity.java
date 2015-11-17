@@ -322,7 +322,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
       showProgress(false);
 
       if (success) {
-        Intent recommendIntent = new Intent(LoginActivity.this, RecommendedActivity.class);
+        Intent recommendIntent = new Intent(LoginActivity.this, MainActivity.class);
         recommendIntent.putExtra(LoginActivity.LOGIN, mEmail + ":" + mPassword);
         startActivity(recommendIntent);
       } else {
