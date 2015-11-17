@@ -1,36 +1,61 @@
 package budgetchef;
 
 public class Fridge {
-  private java.util.PriorityQueue<Ingredient> ingredients_ = new java.util.PriorityQueue<>(
-    new java.util.Comparator<Ingredient>() {
-      @Override
-      public int compare(Ingredient lval, Ingredient rval) {
-        return lval.getName().compareTo(rval.getName());
-      }
-    });
-
+  public enum List { STORAGE, SHOP_LIST; }
+  
+  private java.util.Comparator<Ingredient> nameComparator = new java.util.Comparator<Ingredient>() {
+    @Override
+    public int compare(Ingredient lval, Ingredient rval) {
+      return lval.getName().compareTo(rval.getName());
+    }
+  };
+  
+  private java.util.PriorityQueue<Ingredient> storage_ = new java.util.PriorityQueue<>(nameComparator);
+  private java.util.PriorityQueue<Ingredient> shopList_ = new java.util.PriorityQueue<>();
+  
   public Fridge() {}
   
-  public Ingredient[] getIngredients() {
-    Ingredient[] array = new Ingredient[ingredients_.size()];
-    return ingredients_.toArray(array);
+  private java.util.PriorityQueue<Ingredient> getRelevantCollection(Fridge.List arg) {
+    return arg == Fridge.List.STORAGE? storage_ : shopList_;
+  }
+  
+  public Ingredient[] getIngredients(Fridge.List arg) {
+    java.util.PriorityQueue<Ingredient> collection = getRelevantCollection(arg);
+    Ingredient[] array = new Ingredient[collection.size()];
+    return collection.toArray(array);
   }
 
-  public void add(Ingredient... ingredients) {
+  public Ingredient getIngredient(Fridge.List arg, String name) {
+    java.util.PriorityQueue<Ingredient> collection = getRelevantCollection(arg);
+    for (Ingredient retVal : collection)
+      if (retVal.getName().equals(name))
+        return retVal;
+    return null;
+  }
+  
+  public void addIngredient(Fridge.List arg, Ingredient... ingredients) {
+    java.util.PriorityQueue<Ingredient> collection = getRelevantCollection(arg);
+    
     for (Ingredient toAdd : ingredients) {
       boolean found = false;
-      for (Ingredient toCheck : ingredients_)
+      for (Ingredient toCheck : collection)
         if (toAdd.equals(toCheck)) {
           toCheck.setValue(toCheck.getValue() + toAdd.getValue());
           found = true;
           break;
         }
       if (!found)
-        ingredients_.offer(toAdd);
+        collection.offer(toAdd);
     }
   }
 
-  public void remove(Ingredient toRemove) {
-    ingredients_.remove(toRemove);
+  public void removeIngredient(Fridge.List arg, String toRemove) {
+    java.util.PriorityQueue<Ingredient> collection = getRelevantCollection(arg);
+    
+    for (Ingredient ingRem : collection)
+      if(ingRem.getName().equals(toRemove)) {
+        collection.remove(ingRem);
+        return;
+      }
   }
 }

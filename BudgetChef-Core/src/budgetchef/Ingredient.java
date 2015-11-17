@@ -16,7 +16,11 @@ public class Ingredient {
   public Measurement getMeasurement() { return type_; }
 
   public void setValue(double value) { value_ = value; }
-
+  public void setMeasurement(Measurement type) { type_ = type; }
+  
+  public double increment() { return ++value_; }
+  public double decrement() { return --value_; }
+  
   @Override
   public boolean equals(Object e) {
     if (e instanceof Ingredient) {
