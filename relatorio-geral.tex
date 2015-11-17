@@ -18,6 +18,7 @@
 \usepackage{subfig}																		% Subfigures
 \usepackage{booktabs}																	% Nicer tables
 \usepackage{hyperref}
+\usepackage{pdflscape}
 
 
 %%% Advanced verbatim environment
@@ -186,7 +187,7 @@ A interface do aplicativo permite navegar com facilidade por todas as suas funci
 
 \vfill
 
-\subsubsection{} Relação das Famílias dos Ingredientes. Necessária para sabermos quais ingredientes impossibilitam cada atributo.
+\subsubsection{} Relação das Famílias dos Ingredientes. Útil para praticidade de entrada.
 
 \begin{center}
 \begin{tabular}{ l  l  l  l l }
@@ -202,11 +203,11 @@ A interface do aplicativo permite navegar com facilidade por todas as suas funci
 
 \newpage
 
-\subsubsection{} Relação dos Atributos das Receitas. Atributos que podem ser usados como filtro na busca de receitas.
+\subsubsection{} Relação das Categorias das Receitas. Categorias podem ser usadas como filtro na busca de receitas.
 
 \begin{center}
 \begin{tabular}{ l  l  l  l l }
-  \multicolumn{5}{l}{\textbf{ATRIBUTOS (RECEITAS)}} \\
+  \multicolumn{5}{l}{\textbf{CATEGORIA}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
   \cline{1-5}
@@ -216,20 +217,80 @@ A interface do aplicativo permite navegar com facilidade por todas as suas funci
 \end{tabular}
 \end{center}
 
-\vspace{5mm}
-
-\subsubsection{} E finalmente, a relação que permite especificar quais famílias impossibilitam cada atributo.
+\subsubsection{} Relação de amizades; atributo multivalorado.
 
 \begin{center}
 \begin{tabular}{ l  l  l  l l }
-  \multicolumn{5}{l}{\textbf{ATRIBUTOS (FAMÍLIAS)}} \\
+  \multicolumn{5}{l}{\textbf{AMIZADE}} \\
   \hline
   \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
   \cline{1-5}
-  Primária & ATR\_NOME & Nome do Atributo (vegano, proteico) & Texto & 255 \\
-  Primária & FAM\_NOME & Família que o restringe & Texto & 255
+  Primária & USU\_LOGIN & Login de um usuário & Texto & 255 \\
+  Primária & USU\_AMIG & Login de seu amigo & Texto & 255
 \end{tabular}
 \end{center}
+
+\newpage
+\subsection{Casos de Uso}
+
+\begin{figure}[h!]
+	\centerline{
+	\includegraphics[scale=0.5]{casoUso.png}
+	}
+\end{figure}
+
+As setas cheias representam o destino dos dados quando há mais de um ator possível que pode enviá-los.
+
+\begin{landscape}
+\newpage
+\subsection{Diagrama de Atividade}
+
+\begin{figure}[h!]
+	\centerline{
+	\includegraphics[scale=0.42]{atividade.png}
+	}
+\end{figure}
+
+\end{landscape}
+
+\newpage
+\subsection{Diagrama de Sequência}
+
+\begin{figure}[h!]
+	\centerline{
+	\includegraphics[scale=0.6]{sequencia.png}
+	}
+\end{figure}
+
+\newpage
+\subsection{Identificação de Objetos/Classes}
+
+\begin{figure}[h!]
+	\centerline{
+	\includegraphics[scale=0.4]{UML.png}
+	}
+\end{figure}
+
+
+\newpage
+\subsection{Documento de especificação de requisitos}
+
+Julgamos que os requisitos funcionais já estão bem especificados nos diagramas de Caso de Uso e de Atividade. Por esse motivo, listaremos os requisitos não-funcionais.
+
+\begin{center}
+\begin{tabular}{l l}
+  \textbf{PROPRIEDADE} & \textbf{MÉTRICAS} \\
+  \cline{1-2}
+	\textbf{Facilidade de uso} & 5 minutos de tutorial são suficientes \\
+	\textbf{Portabilidade} & Funcionamento em aparelhos Android™ e iOS™ \\
+	\textbf{Segurança} & Uso do \textbf{Internet Protocol Security (IPsec)} \\
+	\textbf{Velocidade} & Transferência estável média de 10 KB/segundo \\
+	\textbf{Espaço em Disco} & Menos de 100 MB
+\end{tabular}
+\end{center}
+
+
+
 
 
 \end{document}

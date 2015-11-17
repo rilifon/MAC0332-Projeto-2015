@@ -27,7 +27,6 @@
 \begin{document}
 \maketitle
 
-A primeira relação é de receitas. Contém os campos não-multivalorados necessários para descrever uma receita e avaliá-la.
 \subsubsection{} A primeira relação é de receitas. Contém os campos não-multivalorados necessários para descrever uma receita e avaliá-la.
 
 
@@ -132,6 +131,19 @@ A primeira relação é de receitas. Contém os campos não-multivalorados neces
   Primária & ATR\_NOME & Nome do Atributo & Texto & 255 \\
   Primária & REC\_CODIGO & Código da receita com o atributo & Inteiro & 8 \emph{bits} \\
    & ATR\_DESC & Breve descrição do Atributo & Texto & 255
+\end{tabular}
+\end{center}
+
+\subsubsection{} Relação de amizades; atributo multivalorado.
+
+\begin{center}
+\begin{tabular}{ l  l  l  l l }
+  \multicolumn{5}{l}{\textbf{AMIZADE}} \\
+  \hline
+  \textbf{Chave} & \textbf{Campo} & \textbf{Descrição} & \textbf{Tipo} & \textbf{Tamanho} \\
+  \cline{1-5}
+  Primária & USU\_LOGIN & Login de um usuário & Texto & 255 \\
+  Primária & USU\_AMIG & Login de seu amigo & Texto & 255
 \end{tabular}
 \end{center}
 
