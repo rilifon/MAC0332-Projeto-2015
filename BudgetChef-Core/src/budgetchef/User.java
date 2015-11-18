@@ -14,6 +14,7 @@ public class User {
 
   public String getName() { return name_; }
   public Ingredient[] getIngredients() { return fridge_.getIngredients(Fridge.List.STORAGE); }
+  public Ingredient[] getShoppingList() { return fridge_.getIngredients(Fridge.List.SHOP_LIST); }
   
   public Recipe getRecipe(String name) {
     for (Recipe r : recipes_)
@@ -31,6 +32,8 @@ public class User {
     
     return array;
   }
+  
+  public Fridge getFridge() { return fridge_; }
   
   public void addRecipe(Recipe r) { recipes_.add(r); }
   

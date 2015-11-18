@@ -11,7 +11,7 @@ public class Fridge {
   };
   
   private java.util.PriorityQueue<Ingredient> storage_ = new java.util.PriorityQueue<>(nameComparator);
-  private java.util.PriorityQueue<Ingredient> shopList_ = new java.util.PriorityQueue<>();
+  private java.util.PriorityQueue<Ingredient> shopList_ = new java.util.PriorityQueue<>(nameComparator);
   
   public Fridge() {}
   
@@ -49,6 +49,20 @@ public class Fridge {
     }
   }
 
+  public void removeIngredient(Fridge.List arg, String toRemove, double quantity) {
+    java.util.PriorityQueue<Ingredient> collection = getRelevantCollection(arg);
+    
+    for (Ingredient ingRem : collection)
+      if (ingRem.getName().equals(toRemove)) {
+        double currentQuantity = ingRem.getValue();
+        if (currentQuantity <= quantity)
+          collection.remove(ingRem);
+        else 
+          ingRem.substract(quantity);
+        return;
+      }
+  }
+  
   public void removeIngredient(Fridge.List arg, String toRemove) {
     java.util.PriorityQueue<Ingredient> collection = getRelevantCollection(arg);
     

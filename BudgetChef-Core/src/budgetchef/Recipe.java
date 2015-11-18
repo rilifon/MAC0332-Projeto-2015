@@ -1,15 +1,25 @@
 package budgetchef;
 
 public class Recipe {
+  private java.util.Comparator<Ingredient> nameComparator = new java.util.Comparator<Ingredient>() {
+    @Override
+    public int compare(Ingredient lval, Ingredient rval) {
+      return lval.getName().compareTo(rval.getName());
+    }
+  };
+  
   private String name_;
-  private java.util.ArrayList<Ingredient> ingredients_;
-
+  private java.util.PriorityQueue<Ingredient> ingredients_;
+  
+  private java.util.ArrayList<String> steps_ = new java.util.ArrayList<>();
   private double rating_ = 0;
   private double ratingCount_ = 0;
 
   public Recipe(String name, Ingredient... ingredients) {
     name_ = name;
-    ingredients_ = new java.util.ArrayList<>(java.util.Arrays.asList(ingredients));
+    ingredients_ = new java.util.PriorityQueue<>(nameComparator);
+    for (Ingredient ing : ingredients)
+      ingredients_.offer(ing);
   }
 
   public String getName() { return name_; }
@@ -31,6 +41,17 @@ public class Recipe {
       }
   }
   
+  public void removeIngredient(String name, double quantity) {
+    for (Ingredient toRem : ingredients_)
+      if (toRem.getName().equals(name)) {
+        if (toRem.getValue() <= quantity)
+          ingredients_.remove(toRem);
+        else
+          toRem.substract(quantity);
+        return;
+      }
+  }
+  
   public Ingredient getIngredient(String name) {
     for (Ingredient retVal : ingredients_)
       if (retVal.getName().equals(name))
@@ -46,4 +67,11 @@ public class Recipe {
   }
   
   public double getRatings() { return rating_; }
+  
+  public void addStep(int index, String step) { steps_.add(index, step); }
+  public void removeStep(int index) { steps_.remove(index); }
+  public String[] getSteps() {
+    String[] steps = new String[steps_.size()];
+    return steps_.toArray(steps);
+  }
 }
