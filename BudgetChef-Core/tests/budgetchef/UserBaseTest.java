@@ -5,6 +5,14 @@ import org.junit.Test;
 
 public class UserBaseTest {
 
+  private class Pair {
+    public String l, r;
+    Pair(String left, String right) {
+      l = left;
+      r = right;
+    }
+  }
+  
   @Test
   public void testChecking() {
     java.lang.reflect.Method usr, pass;
@@ -31,14 +39,7 @@ public class UserBaseTest {
       java.lang.reflect.Field db = UserBase.class.getDeclaredField("database");
       db.setAccessible(true);
       java.util.HashMap<String, String> database = (java.util.HashMap<String, String>) db.get(null);
-      
-      class Pair {
-        public String l, r;
-        Pair(String left, String right) {
-          l = left;
-          r = right;
-        }
-      }
+
       Pair dualityMan = new Pair("man", "pig");
       UserBase.createUser(dualityMan.l, dualityMan.r);
       
@@ -53,6 +54,28 @@ public class UserBaseTest {
       Pair essenceMan = new Pair("", "");
       UserBase.createUser(essenceMan.l, essenceMan.r);
       Assert.assertFalse(database.containsKey(essenceMan.l));
+    } catch(Exception exc) {
+      System.err.println("Error: " + exc.getMessage());
+    }
+  }
+  
+  @Test
+  public void testValidation() {
+    try {
+      java.lang.reflect.Field db = UserBase.class.getDeclaredField("database");
+      db.setAccessible(true);
+      java.util.HashMap<String, String> database = (java.util.HashMap<String, String>) db.get(null);
+
+      Pair innocent = new Pair("nobody", "everybody");
+      UserBase.createUser(innocent.l, innocent.r);
+      Assert.assertEquals(database.containsKey(innocent.l), UserBase.validate(innocent.l, innocent.r));
+      
+      Pair life = new Pair("real", "lie");
+      UserBase.createUser(life.l, life.r);
+      Assert.assertFalse(UserBase.validate(life.l,life.r));
+      
+      Pair potato = new Pair("is_life", "is_love");
+      Assert.assertFalse(UserBase.validate(potato.l, potato.r));
     } catch(Exception exc) {
       System.err.println("Error: " + exc.getMessage());
     }
