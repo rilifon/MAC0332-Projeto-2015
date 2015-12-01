@@ -31,7 +31,7 @@ public class UserTest {
   @Before
   public final void setUp() {
     nic = new Pair("NicolasCage", "MySnakeskinJacket");
-    david = new Pair("DavidLynch", "cy1ic14l_n4ightm4re");
+    david = new Pair("DavidLynch", "cyc1ic4l_n4ightm4re");
     alejandro = new Pair("PuppetMaster", "who_am_i_who_are_u");
     jean = new Pair("JeanPierre", "questcequecestlavie");
     

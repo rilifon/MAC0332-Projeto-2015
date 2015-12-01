@@ -10,7 +10,7 @@ public class MeasurementTest {
     Assert.assertTrue(Measurement.convertionRatio(
         Measurement.GRAMS, Measurement.ML) == 1);
     Assert.assertTrue(Measurement.convertionRatio(
-        Measurement.TEACUP, Measurement.ML) == 200);
+        Measurement.ML, Measurement.TEACUP) == 200);
   }
   
   @Test
