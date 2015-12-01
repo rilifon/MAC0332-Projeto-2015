@@ -20,13 +20,13 @@ public class Ingredient {
     type_ = type;
     value_ *= Measurement.convertionRatio(type_, type);
   }
-  
+
   public double increment() { return ++value_; }
   public double decrement() { return --value_; }
-  
+
   public void add(double val) { value_ += val; }
   public void substract(double val) { value_ -= val; }
-  
+
   @Override
   public boolean equals(Object e) {
     if (e instanceof Ingredient) {
