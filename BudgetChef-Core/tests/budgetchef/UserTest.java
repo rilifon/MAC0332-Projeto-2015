@@ -30,10 +30,10 @@ public class UserTest {
   
   @Before
   public final void setUp() {
-    Pair nic = new Pair("NicolasCage", "MySnakeskinJacket");
-    Pair david = new Pair("DavidLynch", "cy1ic14l_n4ightm4re");
-    Pair alejandro = new Pair("PuppetMaster", "who_am_i_who_are_u");
-    Pair jean = new Pair("JeanPierre", "questcequecestlavie");
+    nic = new Pair("NicolasCage", "MySnakeskinJacket");
+    david = new Pair("DavidLynch", "cy1ic14l_n4ightm4re");
+    alejandro = new Pair("PuppetMaster", "who_am_i_who_are_u");
+    jean = new Pair("JeanPierre", "questcequecestlavie");
     
     listPairs = new Pair[] {nic, david, alejandro, jean};
     
@@ -63,8 +63,9 @@ public class UserTest {
   
   @Test
   public final void testValidation() {
-    for (int i=0; i<listPairs.length; ++i)
+    for (int i=0; i<listPairs.length; ++i) {
       Assert.assertTrue(listUsers[i].validate(listPairs[i].left_, listPairs[i].right_));
+    }
     Assert.assertFalse(nicCage.validate(david.left_, david.right_));
     Assert.assertFalse(jeanpJeunet.validate(alejandro.left_, alejandro.right_));
   }
