@@ -68,7 +68,12 @@ public class Recipe {
   
   public double getRatings() { return rating_; }
   
-  public void addStep(int index, String step) { steps_.add(index, step); }
+  public void addStep(int index, String step) {
+    if (index >= steps_.size())
+      for (int i=steps_.size(); i<=index; ++i)
+        steps_.add("");
+    steps_.set(index, step);
+  }
   public void removeStep(int index) { steps_.remove(index); }
   public String[] getSteps() {
     String[] steps = new String[steps_.size()];

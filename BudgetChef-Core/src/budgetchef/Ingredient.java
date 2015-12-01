@@ -17,8 +17,8 @@ public class Ingredient {
 
   public void setValue(double value) { value_ = value; }
   public void setMeasurement(Measurement type) {
-    type_ = type;
     value_ *= Measurement.convertionRatio(type_, type);
+    type_ = type;
   }
 
   public double increment() { return ++value_; }

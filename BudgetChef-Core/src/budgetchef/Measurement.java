@@ -28,7 +28,7 @@ public enum Measurement {
   
   public static double convertionRatio(Measurement toChange, Measurement desired) {
     if (toChange.value_ > 0)
-      return toChange.value_/desired.value_;
+      return desired.value_/toChange.value_;
     return 1;
   }
   

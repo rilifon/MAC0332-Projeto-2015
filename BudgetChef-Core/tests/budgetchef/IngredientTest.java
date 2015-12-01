@@ -1,9 +1,6 @@
 package budgetchef;
 
-import java.lang.reflect.Field;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class IngredientTest {
@@ -14,33 +11,33 @@ public class IngredientTest {
     Ingredient pickles = new Ingredient("Pickles", 1, Measurement.TO_TASTE);
     
     Assert.assertEquals(pickles.getName(), "Pickles");
-    Assert.assertEquals(pickles.getValue(), 1);
+    Assert.assertTrue(pickles.getValue() == 1);
     Assert.assertEquals(pickles.getMeasurement(), Measurement.TO_TASTE);
   }
 
   @Test
   public final void testSet() {
     Ingredient pickles = new Ingredient("Pickles", 1, Measurement.TO_TASTE);
-    Ingredient sugar = new Ingredient("Sugar", 1, Measurement.SOUP_SPOONS);
+    Ingredient sugar = new Ingredient("Sugar", 1, Measurement.TEA_SPOONS);
 
     pickles.setValue(2);
-    Assert.assertEquals(pickles.getValue(), 2);
+    Assert.assertTrue(pickles.getValue() == 2);
 
-    sugar.setMeasurement(Measurement.TEA_SPOONS);
-    Assert.assertEquals(sugar.getMeasurement(), Measurement.TEA_SPOONS);
-    Assert.assertEquals(sugar.getValue(), 6);
+    sugar.setMeasurement(Measurement.SOUP_SPOONS);
+    Assert.assertEquals(sugar.getMeasurement(), Measurement.SOUP_SPOONS);
+    Assert.assertEquals(sugar.getValue(), 6, 0.001);
   }
 
   @Test
   public final void testIncDec() {
-    Ingredient cinnamon = new Ingredient("Cinnamon", 2 Measurement.TEA_SPOONS);
+    Ingredient cinnamon = new Ingredient("Cinnamon", 2, Measurement.TEA_SPOONS);
     Ingredient coffee = new Ingredient("Coffee", 1, Measurement.TEACUP);
       
     coffee.increment();
-    Assert.assertEquals(coffee.getValue(), 2);
+    Assert.assertTrue(coffee.getValue() == 2);
 
     cinnamon.decrement();
-    Assert.assertEquals(cinnamon.getValue(), 1);
+    Assert.assertTrue(cinnamon.getValue() == 1);
   }
 
   @Test
@@ -49,10 +46,10 @@ public class IngredientTest {
     Ingredient carrot = new Ingredient("Carrot", 10, Measurement.NIL);
 
     sesame.add(5);
-    Assert.assertEquals(sesame.getValue, 15);
+    Assert.assertTrue(sesame.getValue() == 15);
 
     carrot.substract(5);
-    Assert.assertEquals(carrot.getValue, 5);
+    Assert.assertTrue(carrot.getValue() == 5);
   }
 
   @Test
